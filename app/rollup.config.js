@@ -12,9 +12,8 @@ import replace from '@rollup/plugin-replace';
 
 const production = !process.env.ROLLUP_WATCH;
 
-const appUrl = production ? 'https://noahcardoza.dev/minty/' : undefined
 const basePath = production ? '/minty' : '/'
-const apiBasePath = production ? 'https://minty-importer-api.herokuapp.co' : 'http://localhost:9000'
+const apiBasePath = production ? 'https://minty-importer-api.herokuapp.com' : 'http://localhost:9000'
 
 
 function serve() {
@@ -91,7 +90,7 @@ export default {
 			sourceMap: !production,
 			inlineSources: !production
 		}),
-		
+
 		html2({
 			title: 'Minty',
 			onlinePath: basePath,
