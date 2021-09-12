@@ -8,7 +8,7 @@
 	import { state } from "./store";
 </script>
 
-<Router>
+<Router basepath={process.env.BASE_PATH}>
 	<Route path="/"><Home /></Route>
 	<Route path="/start"><Start /></Route>
 	<Route path="/upload">

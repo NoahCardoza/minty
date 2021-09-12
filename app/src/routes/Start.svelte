@@ -9,7 +9,7 @@
 		const formData = new FormData();
 
 		formData.append("cookies", form.files[0]);
-		const res = await fetch("http://127.0.0.1:9000/api/start", {
+		const res = await fetch(`${process.env.API_BASE_URL}/api/start`, {
 			method: "POST",
 			body: formData,
 		});

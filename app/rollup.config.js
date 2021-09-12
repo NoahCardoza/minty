@@ -6,8 +6,16 @@ import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
+import html2 from 'rollup-plugin-html2';
+import replace from '@rollup/plugin-replace';
+
 
 const production = !process.env.ROLLUP_WATCH;
+
+const appUrl = production ? 'https://noahcardoza.dev/minty/' : undefined
+const basePath = production ? '/minty' : '/'
+const apiBasePath = production ? 'https://minty-importer-api.herokuapp.co' : 'http://localhost:9000'
+
 
 function serve() {
 	let server;
@@ -30,15 +38,34 @@ function serve() {
 	};
 }
 
+function objectMap(object, mapFn) {
+  return Object.keys(object).reduce(function(result, key) {
+    result[key] = mapFn(object[key])
+    return result
+  }, {})
+}
+
+
+const envKeys = (obj) => objectMap(obj, JSON.stringify)
+
 export default {
 	input: 'src/main.ts',
 	output: {
-		sourcemap: true,
+		
+		sourcemap: !production,
 		format: 'iife',
 		name: 'app',
-		file: 'public/build/bundle.js'
+		dir: 'dist'
 	},
 	plugins: [
+		replace({
+			preventAssignment: true,
+			delimiters: ['process.env.', ''],
+			values: envKeys({
+				BASE_PATH: basePath,
+				API_BASE_URL: apiBasePath,
+			})
+		}),
 		svelte({
 			preprocess: sveltePreprocess({ sourceMap: !production }),
 			compilerOptions: {
@@ -63,6 +90,13 @@ export default {
 		typescript({
 			sourceMap: !production,
 			inlineSources: !production
+		}),
+		
+		html2({
+			title: 'Minty',
+			onlinePath: basePath,
+			template: 'public/index.html',
+			favicon: 'public/favicon.png',
 		}),
 
 		// In dev mode, call `npm run start` once

@@ -21,7 +21,7 @@
 		formData.append("csv", form.files[0]);
 		formData.append("session", JSON.stringify($state.session));
 
-		const res = await fetch("http://127.0.0.1:9000/api/import", {
+		const res = await fetch(`${process.env.API_BASE_URL}/api/import`, {
 			method: "POST",
 			body: formData,
 		});
