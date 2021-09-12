@@ -68,7 +68,7 @@
 	</ol>
 	<div class="file-upload">
 		<input bind:this={form} type="file" id="cookies.txt" accept=".txt" />
-		<a on:click={onClick} class="btn">Submit</a>
+		<button on:click={onClick} class="btn">Submit</button>
 	</div>
 
 	{#if errorMessage}

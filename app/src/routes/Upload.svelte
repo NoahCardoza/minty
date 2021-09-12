@@ -173,7 +173,7 @@
 				<Progress value={processProgress} />
 			</div>
 		{/if}
-		<a class="btn" on:click={onClick}>Submit</a>
+		<button class="btn" on:click={onClick}>Submit</button>
 	</div>
 	{#if errorMessage}
 		<p class="error-message">{errorMessage}</p>
