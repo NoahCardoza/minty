@@ -50,7 +50,7 @@ def _import_csv_file(mint, rows):
     yield str(len(rows))
     for row in rows:
         try:
-            res = mint.new_transaction(
+            mint.new_transaction(
                 date=row.date,
                 merchant=row.description,
                 category=row.category,

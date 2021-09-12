@@ -1,12 +1,8 @@
 from json.decoder import JSONDecodeError
-from typing import Dict, Literal, Optional
+from typing import Dict, Literal
 
 import requests
 from api.models.mint import ListAccountsResponse, ListCategoriesResponse
-from requests.api import head
-
-cookies = {"ROUTEID": ".", "mint.glogin": "noahcardoza@gmail.com", "mint.authid": "123145668410787",
-           "mint.ticket": "V1-15-X03b0g4rqdcrjl98i4mjqw", "MINTJSESSIONID": "7CB6D809E4104FED0C98D1076182C2F4-n1"}
 
 MINT_TASK = Literal['accounts', 'categories', 'transactions']
 

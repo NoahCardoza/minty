@@ -1,4 +1,5 @@
 import traceback
+from os import environ
 from typing import Dict
 
 from fastapi import FastAPI, File, HTTPException
@@ -14,9 +15,13 @@ from api.utils.mint import import_csv_file
 
 app = FastAPI()
 
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*'],
+    allow_origins=[
+        'https://noahcardoza.dev' if environ.get(
+            'IS_HEROKU', 'false') == 'true' else 'http://localhost:5000'
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
