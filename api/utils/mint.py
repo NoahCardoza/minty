@@ -1,4 +1,5 @@
 import csv
+import traceback
 from typing import Dict, Generator
 
 from api.mint import Mint
@@ -34,7 +35,7 @@ def parse_csv(categories: Dict[str, int], file: str) -> Generator[CSVRow, None, 
         category_id = categories.get(category)
         if category_id is None:
             raise ValueError(
-                f'The category "{category}" was but it does not exist in Mint.')
+                f'The category "{category}" was used but it does not exist in Mint.')
 
         yield CSVRow(
             date=date,
@@ -45,31 +46,25 @@ def parse_csv(categories: Dict[str, int], file: str) -> Generator[CSVRow, None, 
         )
 
 
+def _import_csv_file(mint, rows):
+    yield str(len(rows))
+    for row in rows:
+        try:
+            res = mint.new_transaction(
+                date=row.date,
+                merchant=row.description,
+                category=row.category,
+                amount=row.amount,
+                notes=row.notes,
+            )
+        except Exception:
+            traceback.print_exc()
+            yield '0'
+            continue
+        yield '1'
+
+
 def import_csv_file(mint: Mint, file: str):
     # parese the whole csv to run error checking before import starts
-    for row in tuple(parse_csv(mint.list_categories(), file)):
-        res = mint.new_transaction(
-            date=row.date,
-            merchant=row.description,
-            category=row.category,
-            amount=row.amount,
-            notes=row.notes,
-        )
-        print(res)
-
-
-if __name__ == '__main__':
-    session = {'ROUTEID': '.', 'mint.glogin': 'noahcardoza@gmail.com', 'mint.authid': '123145668410787',
-               'mint.ticket': 'V1-72-X0nuvnshccfysjszfjhraa', 'MINTJSESSIONID': '590204751ECBB66D7188B46A7871B495-n1'}
-    mint = Mint(session)
-
-    file = b"""Date,Description,Category,Amount,Check #,Notes
-    2/24/21,PAY BY PHONE ACH PAYMENT,Credit Card Payment,99.95,,
-    4/29/21,Amazon.com*UG9HO8ZE3 Amzn.com/bill WA,Home Supplies,-99.95,,
-    3/1/21,Amazon.com*7Q7FA84I3 Amzn.com/bill WA,Home Improvement,-162.54,,
-    2/15/21,WWW COSTCO COM 800-955-2292 WA,Groceries,-67.97,,
-    2/15/21,AMZN Mktp US*375FV8O23 Amzn.com/bill WA,Home Supplies,-14.96,,
-    7/20/20,AMZN Mktp US*MV96B2BA1 Amzn.com/bill WA,Home Supplies,-77.18,,
-    7/15/20,AMZN MKTP US*MJ3IX49Z2 AMZN.COM/BILL WA,Home Supplies,-30.34,,"""
-
-    import_csv_file(mint, file.decode())
+    rows = tuple(parse_csv(mint.list_categories(), file))
+    return _import_csv_file(mint, rows)

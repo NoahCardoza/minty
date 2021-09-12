@@ -7,5 +7,5 @@ def validate_mint_date(cls, date: str) -> str:
         timestamp = datetime.strptime(date, f'%m/%d/{year_type}')
         return timestamp.strftime(f'%m/%d/%Y')
     except ValueError:
-        raise ValueError(f'{date} is an invalid Mint date. Format much conform to mm/dd/yyyy.')
-    
+        raise ValueError(
+            f'{date} is an invalid Mint date. Format much conform to "mm/dd/yy" or "m/d/yyyy".')

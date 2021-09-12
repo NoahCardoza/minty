@@ -1,21 +1,21 @@
 <script lang="ts">
-	import { Router, Link, Route } from "svelte-routing";
+	import { Router, Route } from "svelte-routing";
 	import Home from "./routes/Home.svelte";
 	import Start from "./routes/Start.svelte";
 	import Upload from "./routes/Upload.svelte";
+	import Redirect from "./components/Redirect.svelte";
 
-	// export let url: string = location.pathname;
+	import { state } from "./store";
 </script>
 
 <Router>
-	<!-- <nav>
-		<Link to="/">Home</Link>
-		<Link to="about">About</Link>
-		<Link to="blog">Blog</Link>
-	</nav> -->
-	<div>
-		<Route path="/"><Home /></Route>
-		<Route path="/start"><Start /></Route>
-		<Route path="/upload"><Upload /></Route>
-	</div>
+	<Route path="/"><Home /></Route>
+	<Route path="/start"><Start /></Route>
+	<Route path="/upload">
+		{#if $state == null}
+			<Redirect to="/start" />
+		{:else}
+			<Upload />
+		{/if}
+	</Route>
 </Router>
