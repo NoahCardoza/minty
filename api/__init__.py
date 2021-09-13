@@ -28,6 +28,11 @@ app.add_middleware(
 )
 
 
+@app.get("/ping")
+def ping():
+    return {'pong': True}
+
+
 @app.post("/api/start")
 def start(cookies: bytes = File(default=None)):
     session = filter_cookies_text(cookies.decode())

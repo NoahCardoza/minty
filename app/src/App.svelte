@@ -7,6 +7,9 @@
 
 	// import { state } from "./store";
 
+	// ping heroku to get the instance started ASAP
+	fetch(`${process.env.API_BASE_URL}/ping`);
+
 	const routes = {
 		"/": Home,
 		"/start": Start,
