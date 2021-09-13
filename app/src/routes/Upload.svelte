@@ -3,6 +3,8 @@
 
 	import Progress from "../components/Progress.svelte";
 
+	state.set({});
+
 	let form: HTMLInputElement;
 	let errorMessage: string;
 	let isProcessing: boolean = false;
@@ -61,11 +63,11 @@
 	<h1>Preparing the CSV file</h1>
 	<p>
 		Before we can continue, we need to do something called data normalization.
-		Mint is configured with certian categories so when we upload the CSV we must
-		stick to these categories. If we were to try and use a catergory that
-		doesn't exist in Mint, Mint won't know how to handle this transation and the
-		import will fail. Click <a href="#mint-categories">here</a> to see a list of
-		your avalible categories.
+		Mint is configured with certain categories so when we upload the CSV we must
+		stick to these categories. If we were to try and use a category that doesn't
+		exist in Mint, Mint won't know how to handle this transaction and the import
+		will fail. Click <a href="#mint-categories">here</a> to see a list of your available
+		categories.
 	</p>
 	<p>
 		Before we get into the meat of it, we'll first need to make sure we have the
@@ -155,7 +157,7 @@
 		</li>
 		<li>
 			Make sure all the "Category" cells exist in Mint. To make this easier I've
-			compiled a list below of all the availible categories:
+			compiled a list below of all the available categories:
 			<ul style="column-count: 2;" id="mint-categories">
 				{#each $state.categories as group (group.name)}
 					<li>
