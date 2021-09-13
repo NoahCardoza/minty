@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { navigate } from "svelte-routing";
+	import { push } from "svelte-spa-router";
 	import { state } from "../store";
 
 	let form: HTMLInputElement;
@@ -24,16 +24,15 @@
 		errorMessage = "";
 
 		state.set(data);
-		navigate("/upload");
+		push(`/upload`);
 	};
-
-	let value: number = 30;
 </script>
 
 <main>
 	<div>
 		<h1>Granting Access</h1>
 	</div>
+	<a href="#test">TEST</a>
 	<p>
 		Sadly, Mint does not make it easy to import a CSV into their system. The
 		only way this is possible to to employ a couple of tricks. The way websites
@@ -66,7 +65,7 @@
 		<li>Click the "Export" button in the window that pops up.</li>
 		<li>Upload the saved "intuit.com_cookies.txt" file in the field below:</li>
 	</ol>
-	<div class="file-upload">
+	<div class="file-upload" id="test">
 		<input bind:this={form} type="file" id="cookies.txt" accept=".txt" />
 		<button on:click={onClick} class="btn">Submit</button>
 	</div>
@@ -81,7 +80,7 @@
 		width: 80%;
 		margin: auto;
 		background-color: aliceblue;
-		height: 100%;
+		min-height: 100%;
 		padding: 1rem;
 	}
 </style>

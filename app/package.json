@@ -7,7 +7,7 @@
     "deploy": "gh-pages -d public",
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public --no-clear",
+    "start": "sirv dist --no-clear",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
@@ -18,7 +18,6 @@
     "@tsconfig/svelte": "^2.0.0",
     "gh-pages": "^3.2.3",
     "rollup": "^2.3.4",
-    "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-svelte": "^7.0.0",
     "rollup-plugin-terser": "^7.0.0",
@@ -29,8 +28,9 @@
     "typescript": "4.3.5"
   },
   "dependencies": {
+    "rollup-plugin-css-only": "github:NoahCardoza/rollup-plugin-css-only#build",
     "rollup-plugin-html2": "github:NoahCardoza/rollup-plugin-html2#build",
     "sirv-cli": "^1.0.0",
-    "svelte-routing": "^1.6.0"
+    "svelte-spa-router": "github:NoahCardoza/svelte-spa-router#feat/support-anchor-links"
   }
 }

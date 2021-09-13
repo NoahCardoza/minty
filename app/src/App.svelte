@@ -1,21 +1,17 @@
 <script lang="ts">
-	import { Router, Route } from "svelte-routing";
+	import "../public/style.css";
 	import Home from "./routes/Home.svelte";
 	import Start from "./routes/Start.svelte";
 	import Upload from "./routes/Upload.svelte";
-	import Redirect from "./components/Redirect.svelte";
+	import Router from "svelte-spa-router";
 
-	import { state } from "./store";
+	// import { state } from "./store";
+
+	const routes = {
+		"/": Home,
+		"/start": Start,
+		"/upload": Upload,
+	};
 </script>
 
-<Router basepath={process.env.BASE_PATH}>
-	<Route path="/"><Home /></Route>
-	<Route path="/start"><Start /></Route>
-	<Route path="/upload">
-		{#if $state == null}
-			<Redirect to="/start" />
-		{:else}
-			<Upload />
-		{/if}
-	</Route>
-</Router>
+<Router {routes} />

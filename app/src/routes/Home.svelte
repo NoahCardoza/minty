@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Link } from "svelte-routing";
 </script>
 
 <main>
@@ -19,7 +18,7 @@
 			</div>
 		</div>
 		<div class="right">
-			<Link to="start" class="btn circle">GO</Link>
+			<a href="#/start" class="btn circle">GO</a>
 		</div>
 	</section>
 </main>
@@ -47,10 +46,6 @@
 		justify-content: center;
 
 		box-shadow: 8px 2px 9px 5px #0000004f;
-	}
-
-	.left .top h1 {
-		/* color: #00ce8b; */
 	}
 
 	.left .bottom {
