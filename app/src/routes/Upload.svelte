@@ -179,7 +179,10 @@
 		<p class="error-message">{errorMessage}</p>
 	{/if}
 	<p>
-		If you need any help or find any bugs feel free to open an issue on GitHub.
+		If you need any help or find any bugs feel free to <a
+			href="https://github.com/NoahCardoza/minty/issues"
+			target="_blank">open an issue on GitHub</a
+		>.
 	</p>
 </main>
 
