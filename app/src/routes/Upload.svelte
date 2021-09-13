@@ -33,6 +33,11 @@
 			return;
 		}
 
+		// (window as any).dataLayer.push({
+		// 	event: "stage-uploaded",
+		// 	conversionValue: 100,
+		// });
+
 		errorMessage = "";
 		isProcessing = true;
 

@@ -21,6 +21,11 @@
 			return;
 		}
 
+		// (window as any).dataLayer.push({
+		// 	event: "stage-started",
+		// 	conversionValue: 66,
+		// });
+
 		errorMessage = "";
 
 		state.set(data);
@@ -32,7 +37,6 @@
 	<div>
 		<h1>Granting Access</h1>
 	</div>
-	<a href="#test">TEST</a>
 	<p>
 		Sadly, Mint does not make it easy to import a CSV into their system. The
 		only way this is possible to to employ a couple of tricks. The way websites
@@ -65,7 +69,7 @@
 		<li>Click the "Export" button in the window that pops up.</li>
 		<li>Upload the saved "intuit.com_cookies.txt" file in the field below:</li>
 	</ol>
-	<div class="file-upload" id="test">
+	<div class="file-upload">
 		<input bind:this={form} type="file" id="cookies.txt" accept=".txt" />
 		<button on:click={onClick} class="btn">Submit</button>
 	</div>
