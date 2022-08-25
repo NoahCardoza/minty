@@ -1,3 +1,7 @@
+# NOTICE
+
+It has come to my attenetion that Mint has updated thier API and the code in its current state will NOT work.
+
 # Minty
 
 A little weekend project to help my dad help his mom get set up with [Mint](http://mint.intuit.com/). If
