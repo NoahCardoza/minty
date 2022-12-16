@@ -1,6 +1,8 @@
 # NOTICE
 
-It has come to my attenetion that Mint has updated thier API and the code in its current state will NOT work.
+- (**12/22**) Since Heroku has ended thier free tier instances, I'd taken down the server all together. However, if you are somewhat savvy you should be able to run it locally.
+
+- (**08/22**) It has come to my attenetion that Mint has updated thier API and the code in its current state will NOT work.
 
 # Minty
 
